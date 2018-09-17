@@ -1,3 +1,4 @@
+// Update with your config settings.
 if (process.env.NODE_ENV !== 'production') require('dotenv').load()
 const { DATABASE_URL, NODE_ENV } = process.env
 
@@ -6,10 +7,10 @@ const config = {
     client: 'pg',
     connection: DATABASE_URL,
     migrations: {
-        directory: path.join(__dirname, 'src', 'db', 'migrations')
+        directory: path.join('src', 'db', 'migrations')
     },
     seeds: {
-        directory: path.join(__dirname, 'src', 'db', 'seeds')
+        directory: path.join('src', 'db', 'seeds')
     }
 }
 
@@ -18,3 +19,4 @@ module.exports = {
     production: config,
     testing: { ...config, connection: DATABASE_URL.replace('_dev', '_test') }
 }
+
