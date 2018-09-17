@@ -20,12 +20,28 @@ async function isLoggedIn (req, res, next) {
 }
 
 async function isAuthorized (req, res, next) {
+    try {
+        const authorization = req.headers.authorization
+        if (!authorization) {
+            return next({ status: 401, error: 'You must login to access this data.'})
+        }
 
+        const token = parseToken(authorization)
+        const userId = token.sub.id
+        const reqUser = parseInt(req.params.id)
+        if (userId !== reqUser) {
+            return next({ status: 401, error: 'You are not authorized to access this data.'})
+        }
+
+        next()
+    } catch (e) {
+        next({ status: 401, error: 'Session has expired. Please login again.'})
+    }
 }
 
 module.exports = {
     createToken,
     parseToken,
     isLoggedIn,
-    isAuthorizeds
+    isAuthorized
 }
