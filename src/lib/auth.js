@@ -28,7 +28,8 @@ async function isAuthorized (req, res, next) {
 
         const token = parseToken(authorization)
         const userId = token.sub.id
-        const reqUser = parseInt(req.params.id)
+        const reqUser = parseInt(req.params.id) || parseInt(req.body.user_id)
+        console.log(userId, reqUser)
         if (userId !== reqUser) {
             return next({ status: 401, error: 'You are not authorized to access this data.'})
         }

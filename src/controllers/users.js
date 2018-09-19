@@ -34,8 +34,18 @@ async function get (req, res, next) {
     }
 }
 
+async function patch (req, res, next) {
+    try {
+        const response = await model.patch(req.params.id, req.body)
+        res.json({user: response[0]})
+    } catch (e) {
+        next({ status: 401, error: 'Unable to update user.'})
+    }
+}
+
 module.exports = {
     signup,
     login,
-    get
+    get,
+    patch
 }

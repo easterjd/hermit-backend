@@ -7,4 +7,6 @@ router.post('/login', ctrl.login)
 
 router.get('/:id', auth.isAuthorized, ctrl.get)
 
+router.patch('/:id', auth.isAuthorized, ctrl.patch)
+
 module.exports = router

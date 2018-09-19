@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
       table.increments()
       table.integer('user_id').references('users.id').onDelete('CASCADE')
       table.integer('trail_id').notNullable()
+      table.string('trail_name').notNullable()
       table.string('image_url').notNullable()
       table.string('caption')
       table.timestamps(true,true)

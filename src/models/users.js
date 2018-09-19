@@ -28,8 +28,18 @@ async function get (id) {
         .then(([ user ]) => user)
 }
 
+async function patch (id, body) {
+    return db('users')
+        .where({ id })
+        .update({
+            ...body
+        })
+        .returning('*')
+}
+
 module.exports = {
     create,
     login,
-    get
+    get,
+    patch
 }
