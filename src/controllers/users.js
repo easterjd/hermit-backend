@@ -19,7 +19,7 @@ async function login (req, res, next) {
         const response = await model.login(req.body)
         const token = auth.createToken(response.id)
 
-        res.json({ token })
+        res.json({ token, id: response.id })
     } catch (e) {
         next({ status: 401, error: 'Email or password is incorrect.' })
     }
