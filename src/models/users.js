@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 
 async function create ({ password, ...body }) {
     const hashed = await promisify(bcrypt.hash)(password, 8)
+    console.log('one half')
     return db('users')
         .insert({ ...body, password: hashed })
         .returning('*')
@@ -11,6 +12,7 @@ async function create ({ password, ...body }) {
 }
 
 async function login ({ email, password }) {
+    console.log(email, password)
     return db('users')
         .where({ email })
         .then(async ([ user ]) => {

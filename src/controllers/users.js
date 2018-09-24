@@ -8,7 +8,7 @@ async function signup (req, res, next) {
         console.log('two')
         const token = auth.createToken(response.id)
 
-        res.json({ token })
+        res.json({ token, id: response.id })
     } catch (e) {
         next({ status: 401, error: 'User could not be registered.' })
     }
