@@ -11,8 +11,9 @@ const getBuzz = async ({ trails, date }) => {
         let result = []
         for (let i = 0; i < trails.length; i++) {
             let trail = trails[i]
+            console.log(betterName(trail.name))
             const buzz = await googleTrends.interestOverTime({
-                keyword: trail.name,
+                keyword: betterName(trail.name),
                 startTime: first,
                 endTime: last
             })
@@ -27,7 +28,7 @@ const getBuzz = async ({ trails, date }) => {
             info ? result.push({ ...trail, buzz: info.value}) : result.push({ ...trail, buzz: null})
             
         }
-        // console.log(relDate)
+        console.log(relDate)
         return result
         
     } catch (e) {
@@ -44,6 +45,25 @@ const getRelativeDate = (date) => {
     let lastDay = lastYear.getDay()
     let diff = day - lastDay
     return new Date(lastYear.setDate(lastYear.getDate() + diff))
+}
+
+const betterName = (name) => {
+    if (name.includes('and')) {
+        return name.split('and')[0]
+    }
+    if (name.includes('via')) {
+        return name.split('via')[0]
+    }
+    if (name.includes('from')) {
+        return name.split('from')[0]
+    }
+    if (name.includes('-')) {
+        return name.split(' - ')[1]
+    }
+    if (name.includes(': ')) {
+        return name.split(': ')[1]
+    }
+    return name
 }
 
 module.exports = {
