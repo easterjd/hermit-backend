@@ -14,6 +14,7 @@ app.use('/api/users', require('./routes/users'))
 app.use('/api/trails', require('./routes/trails'))
 app.use('/api/favs', require('./routes/favs'))
 app.use('/api/comments', require('./routes/comments'))
+app.use('/api/buzz', require('./routes/buzz'))
 // app.use('/api/images', require('./routes/images'))
 
 app.use((req, res, next) => {
