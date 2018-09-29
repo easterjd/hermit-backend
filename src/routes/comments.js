@@ -5,7 +5,7 @@ const auth = require('../lib/auth')
 router.get('/:trailId', auth.isLoggedIn, ctrl.commentsByTrail)
 router.get('/user/:id', auth.isAuthorized, ctrl.commentsByUser)
 
-router.post('/', auth.isAuthorized, ctrl.create)
+router.post('/', auth.isLoggedIn, ctrl.create)
 
 router.patch('/:commentId', auth.isAuthorized, ctrl.update)
 

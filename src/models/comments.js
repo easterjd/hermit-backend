@@ -2,6 +2,7 @@ const db = require('../db')
 
 async function commentsByTrail (trailId) {
     return db('comments')
+        .select('users.*', 'comments.*')
         .where({ trail_id: trailId })
         .leftJoin('users', 'comments.user_id', 'users.id')
 }

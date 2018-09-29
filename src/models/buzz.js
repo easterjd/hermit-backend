@@ -11,7 +11,6 @@ const getBuzz = async ({ trails, date }) => {
         let result = []
         for (let i = 0; i < trails.length; i++) {
             let trail = trails[i]
-            console.log(betterName(trail.name))
             const buzz = await googleTrends.interestOverTime({
                 keyword: betterName(trail.name),
                 startTime: first,
@@ -28,7 +27,6 @@ const getBuzz = async ({ trails, date }) => {
             info ? result.push({ ...trail, buzz: info.value}) : result.push({ ...trail, buzz: null})
             
         }
-        console.log(relDate)
         return result
         
     } catch (e) {
