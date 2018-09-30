@@ -1,6 +1,6 @@
 const googleTrends = require('google-trends-api')
 
-const getBuzz = async ({ trails, date }) => {
+const getBuzz = async ({ trail, date }) => {
     try {
         // Later use Google Maps to reverse geocode the region
         const relDate = getRelativeDate(date)
@@ -8,27 +8,21 @@ const getBuzz = async ({ trails, date }) => {
         first.setMonth(first.getMonth() - 4)
         const last = new Date(relDate)
         last.setMonth(last.getMonth() + 4)
-        let result = []
-        for (let i = 0; i < trails.length; i++) {
-            let trail = trails[i]
-            const buzz = await googleTrends.interestOverTime({
-                keyword: betterName(trail.name),
-                startTime: first,
-                endTime: last
-            })
-            const info = JSON.parse(buzz).default.timelineData.find(day => {
-                let thisDate = new Date(day.formattedTime)
-                if (thisDate.getFullYear() === relDate.getFullYear() &&
-                thisDate.getMonth() === relDate.getMonth() &&
-                thisDate.getDate() === relDate.getDate()) {
-                    return day
-                }
-            })
-            info ? result.push({ ...trail, buzz: info.value}) : result.push({ ...trail, buzz: null})
-            
-        }
-        return result
-        
+        const buzz = await googleTrends.interestOverTime({
+            keyword: betterName(trail.name) || trail.name,
+            startTime: first,
+            endTime: last,
+        })
+        const info = JSON.parse(buzz).default.timelineData.find(day => {
+            let thisDate = new Date(day.formattedTime)
+            if (thisDate.getFullYear() === relDate.getFullYear() &&
+            thisDate.getMonth() === relDate.getMonth() &&
+            thisDate.getDate() === relDate.getDate()) {
+                return day
+            }
+        })
+        if (info) return info.value
+        else return null
     } catch (e) {
         console.log(e)
         return e
