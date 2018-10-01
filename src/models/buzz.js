@@ -8,8 +8,9 @@ const getBuzz = async ({ trail, date }) => {
         first.setMonth(first.getMonth() - 4)
         const last = new Date(relDate)
         last.setMonth(last.getMonth() + 4)
+        const newName = betterName(trail.name).length > 5 ? betterName(trail.name) : trail.name
         const buzz = await googleTrends.interestOverTime({
-            keyword: betterName(trail.name) || trail.name,
+            keyword: newName,
             startTime: first,
             endTime: last,
         })
