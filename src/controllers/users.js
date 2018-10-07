@@ -3,9 +3,7 @@ const auth = require('../lib/auth')
 
 async function signup (req, res, next) {
     try {
-        console.log('one')
         const response = await model.create(req.body)
-        console.log('two')
         const token = auth.createToken(response.id)
 
         res.json({ token, id: response.id })

@@ -5,7 +5,6 @@ async function commentsByTrail (req, res, next) {
         const response = await model.commentsByTrail(req.params.trailId)
         res.json({comments: response})
     } catch (e) {
-        console.log(e)
         next({ status: 401, error: 'Cannot retreive comments for this trail.'})
     }
 }

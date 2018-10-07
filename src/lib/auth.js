@@ -1,6 +1,5 @@
 const { SECRET_KEY } = process.env
 const { sign, verify } = require('jsonwebtoken')
-const db = require('../db')
 
 function createToken (id) {
     const sub = { sub: { id }}
@@ -29,15 +28,12 @@ async function isAuthorized (req, res, next) {
         if (!authorization) {
             return next({ status: 401, error: 'You must login to access this data.'})
         }
-
         const token = parseToken(authorization)
         const userId = token.sub.id
         const reqUser = parseInt(req.params.id) || parseInt(req.body.user_id)
-        console.log(userId, reqUser)
         if (userId !== reqUser) {
             return next({ status: 401, error: 'You are not authorized to access this data.'})
         }
-
         next()
     } catch (e) {
         next({ status: 401, error: 'Session has expired. Please login again.'})

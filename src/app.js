@@ -11,10 +11,11 @@ app.use(require('body-parser').json())
 app.use(require('cors')())
 
 app.use('/api/users', require('./routes/users'))
-app.use('/api/trails', require('./routes/trails'))
 app.use('/api/favs', require('./routes/favs'))
 app.use('/api/comments', require('./routes/comments'))
 app.use('/api/buzz', require('./routes/buzz'))
+
+// Will incorporate image routes next
 // app.use('/api/images', require('./routes/images'))
 
 app.use((req, res, next) => {

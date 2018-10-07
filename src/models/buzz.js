@@ -25,7 +25,6 @@ const getBuzz = async ({ trail, date }) => {
         if (info) return info.value
         else return null
     } catch (e) {
-        console.log(e)
         return e
     }
 }
