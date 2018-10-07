@@ -25,6 +25,10 @@ async function login (req, res, next) {
     }
 }
 
+async function check (req, res, next) {
+    res.json({ checked: true })
+}
+
 async function get (req, res, next) {
     try {
         const response = await model.get(req.params.id)
@@ -46,6 +50,7 @@ async function patch (req, res, next) {
 module.exports = {
     signup,
     login,
+    check,
     get,
     patch
 }

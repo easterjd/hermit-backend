@@ -15,8 +15,12 @@ function parseToken (header) {
 }
 
 async function isLoggedIn (req, res, next) {
-    let authCheck = await parseToken(req.headers.authorization)
-    authCheck ? next() : next({status: 401, error: 'Session has expired.'})
+    try {
+        await parseToken(req.headers.authorization)
+        next()
+    } catch (e) {
+        next({status: 401, error: 'Session has expired.'})
+    }
 }
 
 async function isAuthorized (req, res, next) {
