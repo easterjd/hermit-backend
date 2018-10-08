@@ -8,7 +8,7 @@ Back-end for https://github.com/easterjd/hermit-frontend
 
 ## Database Setup
 - Make sure you have PostgreSQL
-- Create a database on your local called `wrightstream_dev`
+- Create a database on your local called `hermit_backend`
 - `npm run knex migrate:latest`
 - `npm run knex seed:run`
 
