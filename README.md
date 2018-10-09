@@ -12,11 +12,7 @@ Back-end for https://github.com/easterjd/hermit-frontend
 - `npm run knex migrate:latest`
 - `npm run knex seed:run`
 
-## Running the tests
-
-Go to the postman link and review tests being run on site
-
 ### Postman Documentation
 
-Postman has already created tests built to test all routes. The documentation will show the results.
+Check the Postman documentation for information on the routes, body data types, and response types.
 Routes: https://documenter.getpostman.com/view/4863350/RWgozeon
